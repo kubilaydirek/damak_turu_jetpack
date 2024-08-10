@@ -1,6 +1,6 @@
 package com.kolaysoft.yemekleruygulamasi.data.model
 
-data class AllMealsModel(
+data class AllFoodModel(
     val success: Int,
     val yemekler: List<Yemekler>
 ) {

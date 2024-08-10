@@ -1,11 +1,8 @@
-package com.kolaysoft.yemekleruygulamasi.data.service
+package com.kolaysoft.yemekleruygulamasi.data.repository
 
 import com.kolaysoft.yemekleruygulamasi.data.model.AllFoodModel
 import retrofit2.Response
-import retrofit2.http.GET
 
-interface ApiService {
-    @GET("yemekler/tumYemekleriGetir.php")
+interface AllFoodRepository {
     suspend fun getAllMeals(): Response<AllFoodModel>
-
 }
