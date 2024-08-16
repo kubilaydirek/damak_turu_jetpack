@@ -1,8 +1,7 @@
 package com.kolaysoft.yemekleruygulamasi.ui.scene.basket
 
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
-import com.kolaysoft.yemekleruygulamasi.data.model.AllFoodModel
+import com.kolaysoft.yemekleruygulamasi.data.model.FoodModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BasketViewModel @Inject constructor() : ViewModel() {
-    private val _meal = MutableStateFlow<List<AllFoodModel.Yemekler?>>(emptyList())
+    private val _meal = MutableStateFlow<List<FoodModel.Yemekler?>>(emptyList())
     val meal = _meal.asStateFlow()
     private val _totalAmount = MutableStateFlow(0)
     val totalAmount = _totalAmount.asStateFlow()
@@ -19,7 +18,7 @@ class BasketViewModel @Inject constructor() : ViewModel() {
     val basketTotalCount = _basketTotalCount.asStateFlow()
 
     fun addMeal(foodName: String, foodId: String, foodImage: String, foodPrice: String, foodQuantity: Int) {
-        val newFood = AllFoodModel.Yemekler(
+        val newFood = FoodModel.Yemekler(
             yemek_adi = foodName,
             yemek_id = foodId,
             yemek_resim_adi = foodImage,
@@ -45,7 +44,7 @@ class BasketViewModel @Inject constructor() : ViewModel() {
 
     }
 
-    fun deleteBasketMeal(food: AllFoodModel.Yemekler) {
+    fun deleteBasketMeal(food: FoodModel.Yemekler) {
         _meal.update { currentList ->
             val mealList = currentList.toMutableList()
             mealList.removeAll { it?.yemek_id == food.yemek_id }

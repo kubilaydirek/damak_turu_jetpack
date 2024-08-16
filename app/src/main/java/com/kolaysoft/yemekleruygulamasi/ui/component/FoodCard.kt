@@ -50,6 +50,7 @@ fun FoodCard(
     foodName: String,
     foodPrice: Int = 0,
     addButtonOnClick: () -> Unit,
+    likedButtonOnClick: () -> Unit
 ) {
     Card(
         modifier = modifier
@@ -64,7 +65,7 @@ fun FoodCard(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LikedButton()
+            LikedButton(likedButtonOnClick)
             FoodImage(imageName = imageName, modifier = Modifier.size(120.dp))
             Spacer(modifier = Modifier.height(10.dp))
             FoodInfo(foodName, modifier)
@@ -77,14 +78,14 @@ fun FoodCard(
 
 
 @Composable
-private fun LikedButton() {
+private fun LikedButton(likedButtonOnClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(onClick = {}) {
+        IconButton(onClick = { likedButtonOnClick.invoke() }) {
             Icon(
                 imageVector = Icons.Outlined.FavoriteBorder,
                 contentDescription = "",
@@ -159,6 +160,7 @@ fun foodCardPreview() {
         imageName = "http://kasimadalan.pe.hu/yemekler/resimler/su.png",
         foodName = "Test",
         foodPrice = 50,
-        addButtonOnClick = {}
+        addButtonOnClick = {},
+        likedButtonOnClick = {}
     )
 }

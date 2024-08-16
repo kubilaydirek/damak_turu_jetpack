@@ -4,5 +4,6 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     id("com.google.dagger.hilt.android") version "2.46" apply false
+    id("androidx.room") version "2.6.1" apply false
 }
 true // Needed to make the Suppress annotation work for the plugins block

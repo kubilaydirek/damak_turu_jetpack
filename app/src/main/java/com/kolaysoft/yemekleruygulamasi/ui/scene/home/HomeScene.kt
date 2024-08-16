@@ -64,6 +64,7 @@ fun HomeScene(
                                             foodQuantity = item.quantity + 1
                                         )
                                     },
+                                    likedButtonOnClick = { viewModel.addFavoriteFood(item) }
                                 )
                             }
                         }

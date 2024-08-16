@@ -6,9 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.WarningAmber
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kolaysoft.yemekleruygulamasi.R
-import com.kolaysoft.yemekleruygulamasi.data.model.AllFoodModel
+import com.kolaysoft.yemekleruygulamasi.data.model.FoodModel
 import com.kolaysoft.yemekleruygulamasi.ui.component.FoodAlertDialog
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.BottomNavItem
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.FoodBottomNavigation
@@ -48,7 +45,7 @@ fun BasketScene(
     val meals by basketViewModel.meal.collectAsState()
     val totalAmount by basketViewModel.totalAmount.collectAsState()
     val openAlertDialog = remember { mutableStateOf(false) }
-    val selectedItem = remember { mutableStateOf<AllFoodModel.Yemekler?>(null) }
+    val selectedItem = remember { mutableStateOf<FoodModel.Yemekler?>(null) }
 
     LaunchedEffect(Unit) {
         basketViewModel.totalAmount()
