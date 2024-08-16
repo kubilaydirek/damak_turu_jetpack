@@ -13,8 +13,10 @@ import javax.inject.Inject
 class BasketViewModel @Inject constructor() : ViewModel() {
     private val _meal = MutableStateFlow<List<AllFoodModel.Yemekler?>>(emptyList())
     val meal = _meal.asStateFlow()
-    private val _totalAmount = MutableStateFlow<Int>(0)
+    private val _totalAmount = MutableStateFlow(0)
     val totalAmount = _totalAmount.asStateFlow()
+    private val _basketTotalCount = MutableStateFlow(0)
+    val basketTotalCount = _basketTotalCount.asStateFlow()
 
     fun addMeal(foodName: String, foodId: String, foodImage: String, foodPrice: String, foodQuantity: Int) {
         val newFood = AllFoodModel.Yemekler(
@@ -39,23 +41,31 @@ class BasketViewModel @Inject constructor() : ViewModel() {
             }
             updatedList
         }
+        totalCount()
+
     }
 
-    fun getMeals(): List<AllFoodModel.Yemekler?> {
-        return meal.value.let {
-            meal.value
+    fun deleteBasketMeal(food: AllFoodModel.Yemekler) {
+        _meal.update { currentList ->
+            val mealList = currentList.toMutableList()
+            mealList.removeAll { it?.yemek_id == food.yemek_id }
+            mealList
         }
-    }
-
-    fun deleteBasketMeal(yemek: AllFoodModel.Yemekler) {
-        _meal.update { item ->
-            item - yemek
-        }
+        totalAmount()
+        totalCount()
     }
 
     fun totalAmount() {
+        _totalAmount.value = 0
         for (i in _meal.value) {
-            _totalAmount.value = (_totalAmount.value + (i?.quantity)!! * (i.yemek_fiyat.toInt()))
+            _totalAmount.value += (i?.quantity ?: 0) * (i?.yemek_fiyat?.toInt() ?: 0)
+        }
+    }
+
+    private fun totalCount() {
+        _basketTotalCount.value = 0
+        for (i in _meal.value) {
+            _basketTotalCount.value += (i?.quantity ?: 0)
         }
     }
 

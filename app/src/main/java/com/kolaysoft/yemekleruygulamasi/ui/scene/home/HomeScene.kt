@@ -34,12 +34,12 @@ fun HomeScene(
     val viewModel: HomeViewModel = hiltViewModel()
     val foodData by viewModel.data.collectAsState()
     val basketCount by basketViewModel.meal.collectAsState()
-
+    val basketTotalCount by basketViewModel.basketTotalCount.collectAsState()
     Scaffold(
         topBar = {
             FoodTopAppBar(modifier = modifier,
                 title = stringResource(id = R.string.damak_turu),
-                basketItemCount = basketCount.size.toString(),
+                basketItemCount = basketTotalCount.toString(),
                 navigateToBasketPage = { onNavigateToBasket.invoke() })
         },
         content = { innerPadding ->

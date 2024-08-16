@@ -35,7 +35,14 @@ import com.kolaysoft.yemekleruygulamasi.R
 import com.kolaysoft.yemekleruygulamasi.ui.theme.MainColor
 
 @Composable
-fun BasketCard(modifier: Modifier, imageName: String, foodName: String, foodPrice: Int, foodPiece: Int) {
+fun BasketCard(
+    modifier: Modifier,
+    imageName: String,
+    foodName: String,
+    foodPrice: Int,
+    foodPiece: Int,
+    deleteIconOnPress: () -> Unit
+) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -78,7 +85,7 @@ fun BasketCard(modifier: Modifier, imageName: String, foodName: String, foodPric
                     verticalArrangement = Arrangement.SpaceAround,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { deleteIconOnPress.invoke() }) {
                         Icon(imageVector = Icons.Default.Delete, contentDescription = "", tint = MainColor)
                     }
                     Text(
@@ -129,5 +136,5 @@ private fun FoodDetail(
 @Preview
 @Composable
 fun BasketCardPreview() {
-    BasketCard(modifier = Modifier, imageName = "", foodName = "Test", foodPrice = 50, foodPiece = 2)
+    BasketCard(modifier = Modifier, imageName = "", foodName = "Test", foodPrice = 50, foodPiece = 2, deleteIconOnPress = {})
 }
