@@ -50,7 +50,8 @@ fun HomeScene(
                             columns = GridCells.Fixed(2),
                         ) {
                             items(foodData!!.yemekler) { item ->
-                                FoodCard(imageName = item.yemek_resim_adi,
+                                FoodCard(
+                                    imageName = item.yemek_resim_adi,
                                     foodName = item.yemek_adi,
                                     modifier = modifier,
                                     foodPrice = item.yemek_fiyat.toInt(),
@@ -60,9 +61,9 @@ fun HomeScene(
                                             foodId = item.yemek_id,
                                             foodImage = item.yemek_resim_adi,
                                             foodName = item.yemek_adi,
-                                            foodQuantity = 0
+                                            foodQuantity = item.quantity + 1
                                         )
-                                    }
+                                    },
                                 )
                             }
                         }

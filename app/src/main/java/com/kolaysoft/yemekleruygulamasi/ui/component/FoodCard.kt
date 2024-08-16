@@ -19,12 +19,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DirectionsBike
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,7 +49,7 @@ fun FoodCard(
     imageName: String,
     foodName: String,
     foodPrice: Int = 0,
-    addButtonOnClick: () -> Unit
+    addButtonOnClick: () -> Unit,
 ) {
     Card(
         modifier = modifier
@@ -66,6 +69,7 @@ fun FoodCard(
             Spacer(modifier = Modifier.height(10.dp))
             FoodInfo(foodName, modifier)
             AddBasket(modifier, foodPrice, addButtonOnClick)
+
 
         }
     }
@@ -141,8 +145,7 @@ private fun AddBasket(modifier: Modifier, foodPrice: Int, addButtonOnClick: () -
                 .size(35.dp)
                 .background(MainColor)
                 .clip(shape = RoundedCornerShape(50.dp))
-                .clickable { addButtonOnClick.invoke() },
-            contentAlignment = Alignment.Center
+                .clickable { addButtonOnClick.invoke() }, contentAlignment = Alignment.Center
         ) {
             Icon(imageVector = Icons.Default.Add, contentDescription = "", tint = Color.White)
         }
@@ -156,5 +159,6 @@ fun foodCardPreview() {
         imageName = "http://kasimadalan.pe.hu/yemekler/resimler/su.png",
         foodName = "Test",
         foodPrice = 50,
-        addButtonOnClick = {})
+        addButtonOnClick = {}
+    )
 }

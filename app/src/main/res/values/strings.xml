@@ -2,4 +2,8 @@
     <string name="app_name">Yemekler Uygulamasi</string>
     <string name="ucretsiz_gonderim">Ücretsiz Gönderim</string>
     <string name="damak_turu">Damak Turu</string>
+    <string name="fiyat">Fiyat : ₺%1$s</string>
+    <string name="adet">Adet : %1$s</string>
+    <string name="bos_sepet">Sepetiniz Boş</string>
+    <string name="sepet_toplami">Sepet Toplamı: %1$s ₺</string>
 </resources>
