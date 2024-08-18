@@ -8,4 +8,5 @@
     <string name="sepet_toplami">Sepet Toplamı: %1$s ₺</string>
     <string name="silmek_istediginize_emin_misiniz">Silmek istediğinize emin misiniz?</string>
     <string name="favorilerim">Favorilerim</string>
+    <string name="favori_listeniz_bos">Favori Listeniz Boş</string>
 </resources>

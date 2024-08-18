@@ -12,10 +12,34 @@ fun NavGraphBuilder.basketNavigation(navController: NavController, modifier: Mod
         BasketScene(
             modifier = modifier,
             basketViewModel = basketViewModel,
-            onNavigateToBasket = { navController.navigate(FoodNavigationEnum.BASKET.name) },
-            onNavigateToFavorite = { navController.navigate(FoodNavigationEnum.FAVORITE.name) },
-            onNavigateToProfile = { navController.navigate(FoodNavigationEnum.PROFILE.name) },
-            onNavigateToHome = { navController.navigate(FoodNavigationEnum.HOME.name) },
+            onNavigateToBasket = {
+                navController.navigate(FoodNavigationEnum.BASKET.name) {
+                    popUpTo(FoodNavigationEnum.BASKET.name) {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToFavorite = {
+                navController.navigate(FoodNavigationEnum.FAVORITE.name) {
+                    popUpTo(FoodNavigationEnum.BASKET.name) {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToProfile = {
+                navController.navigate(FoodNavigationEnum.PROFILE.name) {
+                    popUpTo(FoodNavigationEnum.BASKET.name) {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToHome = {
+                navController.navigate(FoodNavigationEnum.HOME.name) {
+                    popUpTo(FoodNavigationEnum.BASKET.name) {
+                        inclusive = true
+                    }
+                }
+            },
             navigateToBack = { navController.popBackStack() }
         )
     }

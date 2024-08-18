@@ -13,10 +13,34 @@ fun NavGraphBuilder.favoritesNavigation(navController: NavController, modifier: 
         FavoritesScene(
             modifier = modifier,
             basketViewModel = basketViewModel,
-            navigateToBasketPage = { navController.navigate(FoodNavigationEnum.BASKET.name) },
-            onNavigateToHome = { navController.navigate(FoodNavigationEnum.HOME.name) },
-            onNavigateToProfile = { navController.navigate(FoodNavigationEnum.PROFILE.name) },
-            onNavigateToFavorite = { navController.navigate(FoodNavigationEnum.FAVORITE.name) }
+            navigateToBasketPage = {
+                navController.navigate(FoodNavigationEnum.BASKET.name) {
+                    popUpTo(FoodNavigationEnum.FAVORITE.name) {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToHome = {
+                navController.navigate(FoodNavigationEnum.HOME.name) {
+                    popUpTo(FoodNavigationEnum.FAVORITE.name) {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToProfile = {
+                navController.navigate(FoodNavigationEnum.PROFILE.name) {
+                    popUpTo(FoodNavigationEnum.FAVORITE.name) {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToFavorite = {
+                navController.navigate(FoodNavigationEnum.FAVORITE.name) {
+                    popUpTo(FoodNavigationEnum.FAVORITE.name) {
+                        inclusive = true
+                    }
+                }
+            }
         )
     }
 }

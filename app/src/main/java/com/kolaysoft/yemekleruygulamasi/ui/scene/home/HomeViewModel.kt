@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ class HomeViewModel @Inject constructor(
         getAllMeals()
     }
 
-     private fun getAllMeals() {
+    private fun getAllMeals() {
         viewModelScope.launch {
             val result = repository.getAllMeals()
             if (result.code() == 200) {
@@ -38,11 +39,13 @@ class HomeViewModel @Inject constructor(
 
     fun addFavoriteFood(food: FoodModel.Yemekler) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getItem(food.yemek_id).collect { result ->
-                if(result == null){
-                    repository.addFavoriteFood(food)
-                }
+            val result = repository.getItem(food.yemek_id).firstOrNull()
+            if (result == null) {
+                repository.addFavoriteFood(food)
+            } else {
+                repository.deleteFavoritesFood(food.yemek_id)
             }
+
         }
 
     }

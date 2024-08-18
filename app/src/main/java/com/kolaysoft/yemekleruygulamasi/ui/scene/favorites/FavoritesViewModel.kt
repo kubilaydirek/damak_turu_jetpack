@@ -21,10 +21,9 @@ class FavoritesViewModel @Inject constructor(private val repositoy: AllFoodRepos
         getAllFavoriteFood()
     }
 
-    fun getAllFavoriteFood() {
+    private fun getAllFavoriteFood() {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = repositoy.getAllFavoriteFood()
-            if (result.isNotEmpty()) {
+            repositoy.getAllFavoriteFood().collect { result ->
                 _data.value = result
             }
         }

@@ -28,6 +28,7 @@ import com.kolaysoft.yemekleruygulamasi.ui.component.FoodTopAppBar
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.BottomNavItem
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.FoodBottomNavigation
 import com.kolaysoft.yemekleruygulamasi.ui.scene.basket.BasketViewModel
+import com.kolaysoft.yemekleruygulamasi.ui.scene.home.HomeViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -42,6 +43,7 @@ fun FavoritesScene(
     val basketItemCount by basketViewModel.basketTotalCount.collectAsState()
     val favoritesViewModel: FavoritesViewModel = hiltViewModel()
     val favoritesList by favoritesViewModel.data.collectAsState()
+    val homeViewModel: HomeViewModel = hiltViewModel()
 
     Scaffold(
         topBar = {
@@ -61,7 +63,7 @@ fun FavoritesScene(
             ) {
                 if (favoritesList.isEmpty()) {
                     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = "Favori Listeniz Boş")
+                        Text(text = stringResource(R.string.favori_listeniz_bos))
                     }
                 } else {
                     LazyVerticalGrid(
@@ -72,8 +74,7 @@ fun FavoritesScene(
                                 foodPrice = item.yemek_fiyat.toInt(),
                                 imageName = item.yemek_resim_adi,
                                 foodName = item.yemek_adi,
-                                addButtonOnClick = { /*TODO*/ },
-                                likedButtonOnClick = {
+                                addButtonOnClick = {
                                     basketViewModel.addMeal(
                                         foodPrice = item.yemek_fiyat,
                                         foodId = item.yemek_id,
@@ -82,6 +83,7 @@ fun FavoritesScene(
                                         foodQuantity = item.quantity + 1
                                     )
                                 },
+                                likedButtonOnClick = { homeViewModel.addFavoriteFood(item) },
                                 isFavorite = true
                             )
                         }
