@@ -1,5 +1,11 @@
 package com.kolaysoft.yemekleruygulamasi.data.di
 
+import android.app.Application
+import androidx.room.Room
+import com.kolaysoft.yemekleruygulamasi.data.database.AppDatabase
+import com.kolaysoft.yemekleruygulamasi.data.database.FoodDAO
+import com.kolaysoft.yemekleruygulamasi.data.repository.AllFoodRepository
+import com.kolaysoft.yemekleruygulamasi.data.repositoryImp.AllFoodRepositoryImp
 import com.kolaysoft.yemekleruygulamasi.data.service.ApiService
 import dagger.Module
 import dagger.Provides
@@ -17,8 +23,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .build()
+        return OkHttpClient.Builder().build()
     }
 
     @Provides
@@ -35,5 +40,28 @@ object AppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(app: Application): AppDatabase {
+        return Room.databaseBuilder(app, AppDatabase::class.java, "AppDatabase")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFoodDAO(appDatabase: AppDatabase): FoodDAO {
+        return appDatabase.foodDAO
+    }
+
+    @Provides
+    @Singleton
+    fun provideAllFoodRepository(
+        apiService: ApiService,
+        foodDAO: FoodDAO
+    ): AllFoodRepository {
+        return AllFoodRepositoryImp(apiService, foodDAO)
     }
 }

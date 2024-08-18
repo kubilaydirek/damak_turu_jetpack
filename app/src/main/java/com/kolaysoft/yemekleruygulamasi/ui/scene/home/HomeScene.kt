@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -33,8 +36,8 @@ fun HomeScene(
 ) {
     val viewModel: HomeViewModel = hiltViewModel()
     val foodData by viewModel.data.collectAsState()
-    val basketCount by basketViewModel.meal.collectAsState()
     val basketTotalCount by basketViewModel.basketTotalCount.collectAsState()
+    
     Scaffold(
         topBar = {
             FoodTopAppBar(modifier = modifier,
@@ -50,6 +53,8 @@ fun HomeScene(
                             columns = GridCells.Fixed(2),
                         ) {
                             items(foodData!!.yemekler) { item ->
+                                val isFavorite by viewModel.foodIsFavorite(item.yemek_id).collectAsState(initial = false)
+
                                 FoodCard(
                                     imageName = item.yemek_resim_adi,
                                     foodName = item.yemek_adi,
@@ -64,6 +69,8 @@ fun HomeScene(
                                             foodQuantity = item.quantity + 1
                                         )
                                     },
+                                    likedButtonOnClick = { viewModel.addFavoriteFood(item) },
+                                    isFavorite = isFavorite
                                 )
                             }
                         }

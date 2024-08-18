@@ -19,6 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DirectionsBike
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
@@ -50,6 +52,8 @@ fun FoodCard(
     foodName: String,
     foodPrice: Int = 0,
     addButtonOnClick: () -> Unit,
+    likedButtonOnClick: () -> Unit,
+    isFavorite: Boolean
 ) {
     Card(
         modifier = modifier
@@ -64,7 +68,7 @@ fun FoodCard(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LikedButton()
+            LikedButton(likedButtonOnClick, isFavorite)
             FoodImage(imageName = imageName, modifier = Modifier.size(120.dp))
             Spacer(modifier = Modifier.height(10.dp))
             FoodInfo(foodName, modifier)
@@ -77,17 +81,18 @@ fun FoodCard(
 
 
 @Composable
-private fun LikedButton() {
+private fun LikedButton(likedButtonOnClick: () -> Unit, isFavorite: Boolean) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(onClick = {}) {
+        IconButton(onClick = { likedButtonOnClick.invoke() }) {
             Icon(
-                imageVector = Icons.Outlined.FavoriteBorder,
+                imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                 contentDescription = "",
+                tint = if (isFavorite) Color.Red else Color.Black
             )
         }
     }
@@ -159,6 +164,7 @@ fun foodCardPreview() {
         imageName = "http://kasimadalan.pe.hu/yemekler/resimler/su.png",
         foodName = "Test",
         foodPrice = 50,
-        addButtonOnClick = {}
+        addButtonOnClick = {},
+        likedButtonOnClick = {}, isFavorite = true
     )
 }
