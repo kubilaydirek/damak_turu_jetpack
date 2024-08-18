@@ -18,4 +18,7 @@ interface FoodDAO {
     @Query("DELETE FROM food_table WHERE yemek_id = :id")
     suspend fun deleteFavoritesFood(id: String)
 
+    @Query("SELECT * FROM food_table")
+    suspend fun getAllFavoriteFood(): List<FoodModel.Yemekler>
+
 }

@@ -12,4 +12,6 @@ interface AllFoodRepository {
     fun getItem(id: String): Flow<FoodModel.Yemekler?>
 
     suspend fun deleteFavoritesFood(yemek_id: String)
+
+    suspend fun getAllFavoriteFood(): List<FoodModel.Yemekler>
 }

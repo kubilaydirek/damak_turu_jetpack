@@ -14,6 +14,9 @@ fun NavGraphBuilder.favoritesNavigation(navController: NavController, modifier: 
             modifier = modifier,
             basketViewModel = basketViewModel,
             navigateToBasketPage = { navController.navigate(FoodNavigationEnum.BASKET.name) },
+            onNavigateToHome = { navController.navigate(FoodNavigationEnum.HOME.name) },
+            onNavigateToProfile = { navController.navigate(FoodNavigationEnum.PROFILE.name) },
+            onNavigateToFavorite = { navController.navigate(FoodNavigationEnum.FAVORITE.name) }
         )
     }
 }
