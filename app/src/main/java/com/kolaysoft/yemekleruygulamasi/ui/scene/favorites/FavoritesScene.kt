@@ -13,6 +13,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.kolaysoft.yemekleruygulamasi.R
 import com.kolaysoft.yemekleruygulamasi.ui.component.FoodTopAppBar
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.BottomNavItem
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.FoodBottomNavigation
@@ -31,7 +33,7 @@ fun FavoritesScene(
         topBar = {
             FoodTopAppBar(
                 modifier = modifier,
-                title = "Favorilerim",
+                title = stringResource(R.string.favorilerim),
                 basketItemCount = basketItemCount.toString(),
                 navigateToBasketPage = { navigateToBasketPage.invoke() })
         },

@@ -31,8 +31,12 @@ class AllFoodRepositoryImp @Inject constructor(private val service: ApiService, 
         room.insertFavoriteFood(food)
     }
 
-    override fun getItem(id: String): Flow<FoodModel.Yemekler> {
+    override fun getItem(id: String): Flow<FoodModel.Yemekler?> {
         return room.getItem(id)
+    }
+
+    override suspend fun deleteFavoritesFood(yemek_id: String) {
+        room.deleteFavoritesFood(yemek_id)
     }
 
 

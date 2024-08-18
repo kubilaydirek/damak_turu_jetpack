@@ -19,6 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DirectionsBike
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
@@ -50,7 +52,8 @@ fun FoodCard(
     foodName: String,
     foodPrice: Int = 0,
     addButtonOnClick: () -> Unit,
-    likedButtonOnClick: () -> Unit
+    likedButtonOnClick: () -> Unit,
+    isFavorite: Boolean
 ) {
     Card(
         modifier = modifier
@@ -65,7 +68,7 @@ fun FoodCard(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LikedButton(likedButtonOnClick)
+            LikedButton(likedButtonOnClick, isFavorite)
             FoodImage(imageName = imageName, modifier = Modifier.size(120.dp))
             Spacer(modifier = Modifier.height(10.dp))
             FoodInfo(foodName, modifier)
@@ -78,7 +81,7 @@ fun FoodCard(
 
 
 @Composable
-private fun LikedButton(likedButtonOnClick: () -> Unit) {
+private fun LikedButton(likedButtonOnClick: () -> Unit, isFavorite: Boolean) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -87,8 +90,9 @@ private fun LikedButton(likedButtonOnClick: () -> Unit) {
         Spacer(modifier = Modifier.weight(1f))
         IconButton(onClick = { likedButtonOnClick.invoke() }) {
             Icon(
-                imageVector = Icons.Outlined.FavoriteBorder,
+                imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                 contentDescription = "",
+                tint = if (isFavorite) Color.Red else Color.Black
             )
         }
     }
@@ -161,6 +165,6 @@ fun foodCardPreview() {
         foodName = "Test",
         foodPrice = 50,
         addButtonOnClick = {},
-        likedButtonOnClick = {}
+        likedButtonOnClick = {}, isFavorite = true
     )
 }

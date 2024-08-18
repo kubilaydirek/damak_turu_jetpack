@@ -9,5 +9,7 @@ interface AllFoodRepository {
 
     suspend fun addFavoriteFood(food: FoodModel.Yemekler)
 
-    fun getItem(id: String): Flow<FoodModel.Yemekler>
+    fun getItem(id: String): Flow<FoodModel.Yemekler?>
+
+    suspend fun deleteFavoritesFood(yemek_id: String)
 }

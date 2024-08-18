@@ -7,6 +7,7 @@ import com.kolaysoft.yemekleruygulamasi.data.repositoryImp.AllFoodRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +23,7 @@ class HomeViewModel @Inject constructor(
         getAllMeals()
     }
 
-    private fun getAllMeals() {
+     private fun getAllMeals() {
         viewModelScope.launch {
             val result = repository.getAllMeals()
             if (result.code() == 200) {
@@ -36,19 +37,24 @@ class HomeViewModel @Inject constructor(
     }
 
     fun addFavoriteFood(food: FoodModel.Yemekler) {
-        var item: FoodModel.Yemekler? = null
         viewModelScope.launch(Dispatchers.IO) {
             repository.getItem(food.yemek_id).collect { result ->
-                item = result
-            }
-            if (item == null) {
-                repository.addFavoriteFood(food)
-            } else {
-                null
+                if(result == null){
+                    repository.addFavoriteFood(food)
+                }
             }
         }
 
     }
 
+    fun foodIsFavorite(yemekId: String): StateFlow<Boolean> {
+        val isFavorite = MutableStateFlow(false)
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getItem(yemekId).collect { result ->
+                isFavorite.value = result != null
+            }
+        }
+        return isFavorite.asStateFlow()
+    }
 
 }
