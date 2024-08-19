@@ -6,14 +6,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -75,7 +71,7 @@ fun FavoritesScene(
                                 imageName = item.yemek_resim_adi,
                                 foodName = item.yemek_adi,
                                 addButtonOnClick = {
-                                    basketViewModel.addMeal(
+                                    basketViewModel.addFoodToDB(
                                         foodPrice = item.yemek_fiyat,
                                         foodId = item.yemek_id,
                                         foodImage = item.yemek_resim_adi,

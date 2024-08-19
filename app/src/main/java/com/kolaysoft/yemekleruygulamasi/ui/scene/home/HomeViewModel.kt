@@ -3,7 +3,7 @@ package com.kolaysoft.yemekleruygulamasi.ui.scene.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kolaysoft.yemekleruygulamasi.data.model.FoodModel
-import com.kolaysoft.yemekleruygulamasi.data.repositoryImp.AllFoodRepositoryImp
+import com.kolaysoft.yemekleruygulamasi.data.repositoryImp.FoodRepositoryImp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,18 +15,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: AllFoodRepositoryImp,
+    private val repository: FoodRepositoryImp,
 ) : ViewModel() {
     private val _data = MutableStateFlow<FoodModel?>(null)
     val data = _data.asStateFlow()
 
     init {
-        getAllMeals()
+        getAllFoods()
     }
 
-    private fun getAllMeals() {
+    private fun getAllFoods() {
         viewModelScope.launch {
-            val result = repository.getAllMeals()
+            val result = repository.getAllFoods()
             if (result.code() == 200) {
                 result.body()?.let {
                     _data.value = result.body()!!

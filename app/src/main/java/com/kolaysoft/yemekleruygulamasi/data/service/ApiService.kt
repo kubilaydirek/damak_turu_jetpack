@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("yemekler/tumYemekleriGetir.php")
-    suspend fun getAllMeals(): Response<FoodModel>
+    suspend fun getAllFoods(): Response<FoodModel>
 
 }

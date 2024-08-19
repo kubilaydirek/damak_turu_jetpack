@@ -17,7 +17,7 @@ class BasketViewModel @Inject constructor() : ViewModel() {
     private val _basketTotalCount = MutableStateFlow(0)
     val basketTotalCount = _basketTotalCount.asStateFlow()
 
-    fun addMeal(foodName: String, foodId: String, foodImage: String, foodPrice: String, foodQuantity: Int) {
+    fun addFoodToDB(foodName: String, foodId: String, foodImage: String, foodPrice: String, foodQuantity: Int) {
         val newFood = FoodModel.Yemekler(
             yemek_adi = foodName,
             yemek_id = foodId,
@@ -40,7 +40,7 @@ class BasketViewModel @Inject constructor() : ViewModel() {
             }
             updatedList
         }
-        totalCount()
+        calculateTotalCount()
 
     }
 
@@ -50,18 +50,18 @@ class BasketViewModel @Inject constructor() : ViewModel() {
             mealList.removeAll { it?.yemek_id == food.yemek_id }
             mealList
         }
-        totalAmount()
-        totalCount()
+        calculateTotalAmount()
+        calculateTotalCount()
     }
 
-    fun totalAmount() {
+    fun calculateTotalAmount() {
         _totalAmount.value = 0
         for (i in _meal.value) {
             _totalAmount.value += (i?.quantity ?: 0) * (i?.yemek_fiyat?.toInt() ?: 0)
         }
     }
 
-    private fun totalCount() {
+    private fun calculateTotalCount() {
         _basketTotalCount.value = 0
         for (i in _meal.value) {
             _basketTotalCount.value += (i?.quantity ?: 0)

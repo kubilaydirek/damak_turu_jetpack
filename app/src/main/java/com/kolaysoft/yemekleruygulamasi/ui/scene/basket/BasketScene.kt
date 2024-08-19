@@ -48,7 +48,7 @@ fun BasketScene(
     val selectedItem = remember { mutableStateOf<FoodModel.Yemekler?>(null) }
 
     LaunchedEffect(Unit) {
-        basketViewModel.totalAmount()
+        basketViewModel.calculateTotalAmount()
     }
 
     Scaffold(topBar = {

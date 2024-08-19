@@ -4,8 +4,8 @@ import com.kolaysoft.yemekleruygulamasi.data.model.FoodModel
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
-interface AllFoodRepository {
-    suspend fun getAllMeals(): Response<FoodModel>
+interface FoodRepository {
+    suspend fun getAllFoods(): Response<FoodModel>
 
     suspend fun addFavoriteFood(food: FoodModel.Yemekler)
 

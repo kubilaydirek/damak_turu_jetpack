@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.room.Room
 import com.kolaysoft.yemekleruygulamasi.data.database.AppDatabase
 import com.kolaysoft.yemekleruygulamasi.data.database.FoodDAO
-import com.kolaysoft.yemekleruygulamasi.data.repository.AllFoodRepository
-import com.kolaysoft.yemekleruygulamasi.data.repositoryImp.AllFoodRepositoryImp
+import com.kolaysoft.yemekleruygulamasi.data.repository.FoodRepository
+import com.kolaysoft.yemekleruygulamasi.data.repositoryImp.FoodRepositoryImp
 import com.kolaysoft.yemekleruygulamasi.data.service.ApiService
 import dagger.Module
 import dagger.Provides
@@ -61,7 +61,7 @@ object AppModule {
     fun provideAllFoodRepository(
         apiService: ApiService,
         foodDAO: FoodDAO
-    ): AllFoodRepository {
-        return AllFoodRepositoryImp(apiService, foodDAO)
+    ): FoodRepository {
+        return FoodRepositoryImp(apiService, foodDAO)
     }
 }
