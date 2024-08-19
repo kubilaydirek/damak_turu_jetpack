@@ -8,7 +8,7 @@ import com.kolaysoft.yemekleruygulamasi.ui.navigation.FoodNavigationEnum
 
 fun NavGraphBuilder.profileNavigation(navController: NavController, modifier: Modifier) {
     composable(FoodNavigationEnum.PROFILE.name) {
-        ProfilScene(
+        ProfileScene(
             modifier = modifier,
             onNavigateToHome = {
                 navController.navigate(FoodNavigationEnum.HOME.name) {

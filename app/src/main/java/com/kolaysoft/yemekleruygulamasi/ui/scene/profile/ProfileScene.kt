@@ -13,14 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.kolaysoft.yemekleruygulamasi.R
-import com.kolaysoft.yemekleruygulamasi.ui.component.FoodTopAppBar
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.BottomNavItem
 import com.kolaysoft.yemekleruygulamasi.ui.component.bottom_nav.FoodBottomNavigation
 import com.kolaysoft.yemekleruygulamasi.ui.scene.profile.widget.ProfilePageTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ProfilScene(
+fun ProfileScene(
     modifier: Modifier,
     onNavigateToHome: () -> Unit,
     onNavigateToProfile: () -> Unit,
